@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 // Composants
 import Eleve from '../../Components/Eleve/Eleve';
+import MonFragment from '../../HOC/MonFragment/MonFragment';
 
 const MonBoutonStylise = styled.button`
   // CSS !!!
@@ -107,9 +108,9 @@ function App() {
       <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this, 'Elon', 0)}>Transformer le premier élève</MonBoutonStylise>
 
       { afficherEleves ?
-        <>
+        <MonFragment>
           {cartes}
-        </>
+        </MonFragment>
         
         : null
       }
