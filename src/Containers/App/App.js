@@ -1,5 +1,5 @@
 // Librairies
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import styled from 'styled-components';
 
@@ -58,6 +58,7 @@ function App() {
     nouveauxEleves[index].nom = nouveauNom;
     setEleves(nouveauxEleves);
     setTransformation(true);
+    elementInput.current.focus();
   }
 
   const showHideClickedHandler = () => {
@@ -83,19 +84,30 @@ function App() {
     padding: '15px'
   };
 
-  let cartes = eleves.map((eleve, index) => (
-    <Eleve
+  const elementInput = useRef(null);
+
+  let cartes = eleves.map((eleve, index) => {
+    let maVariableRef = null;
+    if(index === 0) {
+      maVariableRef=elementInput;
+    }
+
+    return (
+      <Eleve
       key={index}
       nom={eleve.nom}
       moyenne={eleve.moyenne}
       clic={() => buttonClickedHandler('Lea', index)}
       supprimer={() => removedClickHandler(index)}
       changerNom={(e) => nameChangedHandler(e, index)}
+      maRef={maVariableRef}
     >
       {eleve.citation}
     </Eleve>
-    )
-  );
+    );
+  });
+
+
 
   // JSX
   return (

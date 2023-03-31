@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 import classes from './Eleve.module.css';
 import styled from 'styled-components';
-import { render } from '@testing-library/react';
+
 
 const Carte = styled.div`
     background-color: ${props => props.background};
@@ -43,6 +43,7 @@ function Eleve(props) {
     const moyenneClasses = [];
     let carteBackground;
 
+
     if(props.moyenne > 10) {
         moyenneClasses.push(classes.green);
         carteBackground = '#d2f5e3';
@@ -74,7 +75,7 @@ function Eleve(props) {
             <p>Age : {Math.floor(Math.random() * 100)}</p>
             <i>{props.children}</i>
             {message}
-            <input type="text" onChange={props.changerNom} value={props.nom} style={{width: '100%'}} />
+            <input ref={props.maRef} type="text" onChange={props.changerNom} value={props.nom} style={{width: '100%'}} />
             <button onClick={props.supprimer} style={{marginTop: '5px'}}>Supprimer</button>
         </Carte>
     );
