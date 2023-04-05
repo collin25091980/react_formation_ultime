@@ -1,4 +1,9 @@
+// Librairie
 import React from 'react';
+
+
+//Contexte
+import { ThemeContext } from '../../context/theme-context';
 
 class Search extends React.Component {
    // Etiquette (ref)
@@ -7,13 +12,15 @@ class Search extends React.Component {
       this.searchRef = React.createRef();
    }
 
+   // Contexte
+   static contextType = ThemeContext;
+
    // Ajouter aux JSX
 
    // Utiliser
    componentDidMount() {
       this.searchRef.focus();
    }
-
 
 
    render() {
@@ -25,7 +32,9 @@ class Search extends React.Component {
                width: '90%',
                display: 'block',
                margin: 'auto',
-               padding: '3px'
+               padding: '3px',
+               background: this.context.background,
+               color: this.context.foreground
             }}
          />
       )

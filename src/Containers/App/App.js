@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Eleve from '../../Components/Eleve/Eleve';
 import MonFragment from '../../HOC/MonFragment/MonFragment';
 import Search from '../../Components/Search/Search';
+import ThemeContextProvider from '../../context/theme-context';
 
 const MonBoutonStylise = styled.button`
   // CSS !!!
@@ -102,9 +103,9 @@ function App() {
       supprimer={() => removedClickHandler(index)}
       changerNom={(e) => nameChangedHandler(e, index)}
       maRef={maVariableRef}
-    >
+      >
       {eleve.citation}
-    </Eleve>
+      </Eleve>
     );
   });
 
@@ -112,26 +113,46 @@ function App() {
 
   // JSX
   return (
-    <div className="App">
-      
-      <h1 style={h1Style}>Bienvenue dans la classe Terre</h1>
-
-      <MonBoutonStylise onClick={showHideClickedHandler}>Afficher / Masquer</MonBoutonStylise>
-
-      <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this, 'Elon', 0)}>Transformer le premier élève</MonBoutonStylise>
-
-      <Search />
-      { afficherEleves ?
-        <MonFragment>
-          {cartes}
-        </MonFragment>
+    <ThemeContextProvider>
+      <div className="App">
         
-        : null
-      }
+        <h1 style={h1Style}>Bienvenue dans la classe Terre</h1>
 
-    </div>
+        <MonBoutonStylise onClick={showHideClickedHandler}>Afficher / Masquer</MonBoutonStylise>
+
+        <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this, 'Elon', 0)}>Transformer le premier élève</MonBoutonStylise>
+
+        <Search />
+        { afficherEleves ?
+          <MonFragment>
+            {cartes}
+          </MonFragment>
+          
+          : null
+        }
+
+
+      </div>
+    </ThemeContextProvider>
   );
 
 }
 
 export default App;
+
+/*
+SANS CONTEXTE
+App.js
+  Navigation.js
+    Liens
+      Lien ? dark
+
+AVEC CONTEXTE
+App.js -> créer un contexte
+  Navigation.js
+    Liens
+      Lien -> j'utilise le contexte
+
+  
+
+*/

@@ -1,7 +1,10 @@
 // Librairies
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import classes from './Eleve.module.css';
 import styled from 'styled-components';
+
+// Contexte
+import { ThemeContext } from '../../context/theme-context';
 
 
 const Carte = styled.div`
@@ -16,6 +19,8 @@ const Carte = styled.div`
 `;
 
 function Eleve(props) {
+    const theme = useContext(ThemeContext);
+    console.log(theme);
 
     // componentDidMount
     useEffect(() => {
@@ -75,7 +80,17 @@ function Eleve(props) {
             <p>Age : {Math.floor(Math.random() * 100)}</p>
             <i>{props.children}</i>
             {message}
-            <input ref={props.maRef} type="text" onChange={props.changerNom} value={props.nom} style={{width: '100%'}} />
+            <input 
+                ref={props.maRef} 
+                type="text" 
+                onChange={props.changerNom} 
+                value={props.nom} 
+                style={{
+                    width: '100%',
+                    background: theme.background,
+                    color: theme.foreground
+                }} 
+            />
             <button onClick={props.supprimer} style={{marginTop: '5px'}}>Supprimer</button>
         </Carte>
     );
