@@ -27,24 +27,28 @@ const MonBoutonStylise = styled.button`
 function App() {
 
   // States
-  const [eleves, setEleves] = useState([
-    {
-      nom: 'Eva Dupont',
-      moyenne: 10,
-      citation: 'Allez toujours plus loin !'
-    },
-    {
-      nom: 'Timothée Galo',
-      moyenne: 5,
-      citation: null
-    }
-  ]);
+  const [eleves, setEleves] = useState([]);
+
   const [transformation, setTransformation] = useState(false);
   const [afficherEleves, setAfficherEleves] = useState(true);
 
   // Etats
   useEffect(() => {
     console.log('[App.js] useEffect');
+
+    // Récupérer les eleves
+    axios.get('https://formation-react-11a45-default-rtdb.europe-west1.firebasedatabase.app/eleves.json')
+      .then(response => {
+        const nouveauxEleves = [];
+        for(let key in response.data) {
+          nouveauxEleves.push({
+            ...response.data[key],
+            id: key
+          });
+        }
+        setEleves(nouveauxEleves);
+      });
+      
 
     return() => {
       console.log('[App.js] useEffect (didUnmount)');
