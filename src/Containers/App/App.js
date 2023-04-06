@@ -41,12 +41,21 @@ function App() {
       .then(response => {
         const nouveauxEleves = [];
         for(let key in response.data) {
-          nouveauxEleves.push({
-            ...response.data[key],
-            id: key
-          });
+          if(response.data[key].moyenne >= 10) {
+            nouveauxEleves.push({
+              ...response.data[key],
+              id: key
+            });
+          }
         }
+        // Filter
+        // const elevesFiltres = nouveauxEleves.filter(eleve => eleve.moyenne >= 10);
+
+
         setEleves(nouveauxEleves);
+
+  
+
       });
       
 
