@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import styled from 'styled-components';
+import axios from 'axios';
 
 // Composants
 import Eleve from '../../Components/Eleve/Eleve';
@@ -79,6 +80,19 @@ function App() {
     setEleves(nouveauxEleves);
   }
 
+  const addStudentHandler = () => {
+    const eleve = {
+      nom: 'Eleve Generique',
+      moyenne: Math.floor(Math.random() * 20),
+      citation: 'Allez toujours plus loin !'
+    };
+
+    axios.post('https://formation-react-11a45-default-rtdb.europe-west1.firebasedatabase.app/eleves.json', eleve)
+      .then(response => {
+        console.log(response);
+      });
+  }
+
   // Variables
   const h1Style = {
     color: 'green',
@@ -121,6 +135,8 @@ function App() {
         <MonBoutonStylise onClick={showHideClickedHandler}>Afficher / Masquer</MonBoutonStylise>
 
         <MonBoutonStylise transformed={transformation} onClick={buttonClickedHandler.bind(this, 'Elon', 0)}>Transformer le premier élève</MonBoutonStylise>
+
+        <MonBoutonStylise onClick={addStudentHandler}>Ajouter un élève</MonBoutonStylise>
 
         <Search />
         { afficherEleves ?

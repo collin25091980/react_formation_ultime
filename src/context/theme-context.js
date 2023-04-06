@@ -17,7 +17,7 @@ export const ThemeContext = React.createContext(themes.light);
 // Créer le provider (fournisseur)
 const ThemeContextProvider = props => {
    return (
-      <ThemeContext.Provider value={themes.dark}>
+      <ThemeContext.Provider value={themes.light}>
          {props.children}
       </ThemeContext.Provider>
    );
