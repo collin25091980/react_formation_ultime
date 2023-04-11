@@ -77,7 +77,7 @@ function Eleve(props) {
                     {props.moyenne}/20
                 </b>
             </p>
-            <p>Age : {Math.floor(Math.random() * 100)}</p>
+            <p>Age : {props.age}</p>
             <i>{props.children}</i>
             {message}
             <input 
